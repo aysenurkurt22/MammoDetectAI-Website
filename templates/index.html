@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mamografi Projesi</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts: Montserrat & Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <style>
+    /* Genel Stil */
+    body {
+        margin: 0;
+        padding: 0;
+        /* Hem görsel hem de yarı saydam (örneğin, %30 sıvı opaklık) overlay ekliyoruz */
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+            url('/static/images/slider.png') no-repeat center center fixed;
+
+        background-size: cover;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff; /* Overlay koyu olduğu için yazıların okunması adına beyaz renk */
+      }
+      
+    /* Header / Navbar */
+    /* Navbar */
+    header {
+      position: absolute; /* Görselin üstüne taşımak için */
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: transparent; /* Şeffaf arka plan */
+      z-index: 100; /* Diğer içeriklerin üstünde */
+    }
+    
+    .navbar {
+      padding: 1rem 2rem; /* Yeterli boşluk için */
+    }
+    
+    .navbar-brand {
+      color: #ffffff !important; /* Menüler beyaz renkte */
+      font-size: 1.2rem;
+      margin-left: 1rem;
+      transition: color 0.3s;
+    }
+    .navbar-brand:hover {
+      color: #ffdd00 !important; 
+    }
+    .nav-link {
+      color: #ffffff !important; /* Menüler beyaz renkte */
+      font-size: 1rem;
+      margin-left: 1rem;
+      transition: color 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #ffdd00 !important; /* Üzerine gelince vurgulu renk */
+    }
+    
+    
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+      background: url('static/images/slider.png') no-repeat center;
+      background-size: cover;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(14, 14, 14, 0.5);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      background: rgba(255,255,255,0.95);
+      padding: 2rem 3rem;
+      border-radius: 8px;
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+    }
+    .hero-content .logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+    .hero-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #666;
+    }
+    .hero-buttons a {
+      padding: 0.75rem 2rem;
+      margin: 0 0.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .hero-buttons a.btn-takvım {
+      background: #28a745;
+      color: #fff;
+    }
+    .hero-buttons a.btn-takvım:hover {
+      background: #218838;
+    }
+    .hero-buttons a.btn-blog {
+      background: #007bff;
+      color: #fff;
+    }
+    .hero-buttons a.btn-blog:hover {
+      background: #0069d9;
+    }
+    /* Bölüm Başlıkları */
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+    /* Scan Section */
+    .scan-section {
+      padding: 80px 2rem;
+      background: #fff;
+      text-align: center;
+    }
+    .scan-section p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: #666;
+    }
+    .scan-section a.btn-scan {
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      border: 2px solid #28a745;
+      color: #28a745;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .scan-section a.btn-scan:hover {
+      background: #28a745;
+      color: #fff;
+    }
+    /* Blog Section */
+    .blog-section {
+      padding: 80px 2rem;
+      background: #f8f9fa; /* Hafif gri arka plan */
+    }
+    
+    .blog-card {
+      margin: 0 15px;
+      background: #fff; /* Beyaz kart arka planı */
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover efektleri */
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-5px); /* Hover'da yukarı kalkma efekti */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Hover gölgesi */
+    }
+    
+    .blog-card img {
+      width: 100%; /* Görsel genişliği */
+      height: 200px; /* Sabit görsel yüksekliği */
+      object-fit: cover; /* Görselin düzgün kırpılması */
+    }
+    
+    .blog-card .card-body {
+      padding: 20px;
+      text-align: left;
+    }
+    
+    .blog-card h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #333; /* Başlık rengi */
+    }
+    
+    .blog-card p {
+      font-size: 1rem;
+      color: #666; /* Metin rengi */
+      margin-bottom: 15px;
+    }
+    
+    .blog-card .read-more {
+      display: inline-block;
+      color: #007bff; /* Link rengi */
+      text-decoration: none; /* Alt çizgi yok */
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    
+    .blog-card .read-more:hover {
+      color: #0056b3; /* Hover sırasında koyu mavi */
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      padding: 80px 2rem;
+      background: #fff;
+      text-align: center;
+    }
+    .contact-section form input,
+    .contact-section form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .contact-section form button {
+      padding: 0.75rem 2rem;
+      border: none;
+      background: #007bff;
+      color: #fff;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact-section form button:hover {
+      background: #0069d9;
+    }
+    /* Footer */
+    footer {
+      background: #222;
+      color: #aaa;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .alert-success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+    
+    .alert-error {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+    
+    .alert {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      
+      transition: opacity 0.5s ease, transform 0.5s ease; /* Geçiş efekti */
+      text-align: center;
+    }
+    .blog-scroll-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-scroll-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  scrollbar-width: none; /* Firefox */
+}
+
+.blog-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+.blog-card {
+  flex: 0 0 300px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.blog-card .card-body {
+  padding: 15px;
+  text-align: left;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.scroll-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.scroll-btn.left {
+  left: -10px;
+}
+
+.scroll-btn.right {
+  right: -10px;
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="/">MAMOGRAFİ</a>
+        <button 
+          class="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav" 
+          aria-controls="navbarNav" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+              <!-- Blog Yaz butonu (her zaman görünür) -->
+             <!-- <li class="nav-item">
+                <a class="nav-link btn-blogyaz" href="/blog-yaz">Blog Yaz</a>
+              </li> -->
+
+            {% if logged_in %}
+            <!-- Move Hesabım and Çıkış Yap to the navbar -->
+            <li class="nav-item">
+              <a class="nav-link btn-login" href="/account">Hesabım</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-register" href="/logout">Çıkış Yap</a>
+            </li>
+            {% else %}
+            <!-- Move Giriş Yap and Kayıt Ol to the navbar -->
+            <li class="nav-item">
+              <a class="nav-link btn-login" href="/login">Giriş Yap</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-register" href="/register">Kayıt Ol</a>
+            </li>
+            {% endif %}
+           
+
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+      <!-- Flash Mesajları -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="container mt-3">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    
+
+  </header>
+  
+  
+  
+  
+  
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content text-center">
+      <h1>Modern Mamografi Çözümleri</h1>
+      <p>Sağlığını ihmal etme, erken teşhis hayat kurtarır.</p>
+      <div class="hero-buttons">
+        <!-- Yeşil Buton: Muayene Takvimi -->
+        <a href="#scan-section" class="btn-takvım">Tara</a>
+        <a href="#blog-section" class="btn-blog">Blog</a>
+      </div>
+    </div>
+  </section>
+  
+  
+  <!-- Scan Section -->
+  <section class="scan-section" id="scan-section">
+    <div class="container">
+      <h2 class="section-title">Sonuçlarınızı Taratın</h2>
+      <p>Mamografi analiz sonuçlarınızı hızlı, güvenli ve doğru şekilde tarayın. Detaylı sonuçlar için lütfen kayıt olun.</p>
+      <a href="/scan" class="btn-scan">Sonuçları Tarat</a>
+    </div>
+  </section>
+  
+ <!-- Blog Section -->
+  <section class="blog-section" id="blog-section">
+  <div class="container">
+    <h2 class="section-title">Meme Kanseri Hakkında Bilgilendirici Blog</h2>
+
+    <!-- Kaydırma Butonları -->
+    <div class="blog-scroll-wrapper">
+  <button class="scroll-btn left" onclick="scrollBlogs(-1)">
+    <i class="bi bi-chevron-left"></i>
+  </button>
+
+  <div class="blog-scroll-container" id="blogContainer">
+    {% for blog in blogs %}
+    <div class="blog-card" onclick="window.location.href='/blog/{{ blog._id }}'" style="cursor: pointer;">
+      {% if blog.image %}
+      <img src="data:image/jpeg;base64,{{ blog.image }}" alt="{{ blog.title }}">
+      {% endif %}
+      <div class="card-body">
+        <h5>{{ blog.title }}</h5>
+        <p>{{ blog.content[:100] }}...</p>
+        <!-- <a href="/blog/{{ blog._id }}" class="read-more">Devamını Oku →</a> -->
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <button class="scroll-btn right" onclick="scrollBlogs(1)">
+    <i class="bi bi-chevron-right"></i>
+  </button>
+</div>
+
+</section>
+
+  
+
+ <section class="contact-section">
+  <div class="container">
+    <h2 class="section-title">İletişim</h2>
+    <p>Bize ulaşın: info@mamografiprojesi.com</p>
+    <form action="/contact" method="post" class="mx-auto" style="max-width:600px;">
+      <div class="mb-3">
+        <input type="text" class="form-control" name="name" placeholder="Adınız" required>
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" name="email" placeholder="E-posta" required>
+      </div>
+      <div class="mb-3">
+        <textarea class="form-control" name="message" rows="4" placeholder="Mesajınız" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Gönder</button>
+    </form>
+  </div>
+</section>
+
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Mamografi Projesi. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+  
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Sayfadaki alert (flash mesaj) elementlerini seç
+    const alerts = document.querySelectorAll('.alert');
+  
+    // Her bir alert için kaybolma zamanlayıcısı ekle
+    alerts.forEach(alert => {
+      setTimeout(() => {
+        alert.classList.remove('show'); // Görünürlük sınıfını kaldır
+        alert.classList.add('fade'); // Kaybolma animasyonu ekle
+        setTimeout(() => alert.remove(), 500); // Elementi tamamen kaldır
+      }, 2000); // 3 saniye sonra kaybolmaya başlar
+    });
+
+      function scrollBlogs(direction) {
+    const container = document.getElementById('blogContainer');
+    const scrollAmount = 320; // Kart genişliği + gap
+    container.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+  </script>
+  
+</body>
+</html>

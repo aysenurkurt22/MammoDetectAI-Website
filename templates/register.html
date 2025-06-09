@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kayıt Ol - Mamografi Projesi</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* Genel Stil */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #1f1f1f, #007bff, #28a745); /* Hareketli gradyan */
+      background-size: 400% 400%;
+      animation: gradient-animation 10s ease infinite; /* Gradyan animasyonu */
+      display: flex; /* Esnek düzen */
+      justify-content: center; /* Yatay ortalama */
+      align-items: center; /* Dikey ortalama */
+    }
+    
+    @keyframes gradient-animation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Register Kartı */
+    .register-card {
+        background: rgba(255, 255, 255, 0.1); /* Şeffaf form arka plan */
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Hafif gölge */
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .register-card h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3); /* #28a745'in RGB değerine göre */
+
+      border: 1px solid #5dcc85;
+      }
+      
+
+    .btn-primary {
+      background-color: #5dcc85;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      width: 100%;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color:rgb(66, 145, 95);
+    }
+
+    .register-card .login-link {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .register-card .login-link a {
+      color: #5dcc85;
+      text-decoration: none;
+    }
+
+    .register-card .login-link a:hover {
+      color: #5dcc85;
+    }
+    header {
+      position: absolute;
+      top: 20px;
+      left: 70px;
+      z-index: 1000; /* Üstte görünmesi için */
+    }
+    
+    .btn-back-home {
+      font-size: 1.8rem; /* Simgenin boyutu */
+      color: #fff; /* Beyaz renk */
+      text-decoration: none; /* Alt çizgiyi kaldır */
+      background: none; /* Arka plan yok */
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease; /* Geçiş efektleri */
+    }
+    
+    .btn-back-home:hover {
+      color: #ff7e5f; /* Hover sırasında renk değişikliği */
+      transform: translateX(-5px); /* Hover'da sola hareket */
+    }
+  </style>
+</head>
+<header>
+  <a href="/" class="btn-back-home" aria-label="Ana Sayfa">
+    ←
+  </a>
+</header>
+
+<body>
+  <div class="register-card">
+    <h1>Kayıt Ol</h1>
+    <form method="POST" action="/register">
+      <input type="text" class="form-control" name="username" placeholder="Kullanıcı Adı" required>
+      <input type="email" class="form-control" name="email" placeholder="E-posta" required>
+      <input type="password" class="form-control" name="password" placeholder="Şifre" required>
+      <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+    </form>
+    <p class="login-link">Zaten hesabınız var mı? <a href="/login">Giriş Yapın</a></p>
+  </div>
+</body>
+</html>

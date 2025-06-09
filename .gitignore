@@ -1,0 +1,17 @@
+# Python environment
+venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# macOS
+.DS_Store
+
+# Uploads klasörü (görseller, büyük dosyalar olabilir)
+uploads/
+
+# Model dosyaları (örneğin .keras, .h5)
+*.keras
+*.h5

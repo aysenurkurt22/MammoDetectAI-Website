@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Görsel Tarama - Mamografi Projesi</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    /* Genel Sayfa Stili */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1f1f1f, #007bff, #28a745); /* Hareketli gradyan */
+      background-size: 400% 400%;
+      animation: gradient-animation 10s ease infinite; /* Gradyan animasyonu */
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes gradient-animation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .scan-container {
+      background: rgba(255, 255, 255, 0.9); /* Saydam beyaz kutu */
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .scan-container:hover {
+      transform: translateY(-5px); /* Hover'da yukarı kaldırma efekti */
+      box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .scan-container h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .scan-container p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px dashed #007bff; /* Modern çerçeve */
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      color: #333;
+      text-align: center;
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    .form-control:hover {
+      border-color: #0056b3; /* Daha koyu bir mavi */
+    }
+
+    .btn-primary {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 50px;
+      width: 100%;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #218838;
+      transform: scale(1.05); /* Hafif büyüme efekti */
+    }
+
+    #loader {
+      display: none;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #5dcc85;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    #result.success {
+      color: #28a745; /* İyi Huylu */
+    }
+
+    #result.danger {
+      color: #dc3545; /* Kötü Huylu */
+    }
+    /* Kullanıcı Seçim Butonları */
+.user-options .btn-primary {
+  background-color: #28a745; /* Yeşil */
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  border: none;
+  width: 100%;
+  margin-bottom: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.user-options .btn-primary:hover {
+  background-color: #218838; /* Daha koyu yeşil */
+  transform: scale(1.05); /* Hafif büyüme efekti */
+}
+
+.user-options .btn-secondary {
+  background-color: #007bff; /* Mavi */
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  border: none;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.user-options .btn-secondary:hover {
+  background-color: #0056b3; /* Daha koyu mavi */
+  transform: scale(1.05); /* Hafif büyüme efekti */
+}
+
+#scan-result {
+  margin-top: 20px;
+  padding: 20px;
+  background: none; /* Hafif yeşil arka plan */
+  
+  color: #333; /* Yazı rengi */
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+#scan-result ul {
+  list-style: none; /* Noktaları kaldır */
+  padding: 0;
+}
+
+#scan-result ul li {
+  font-size: 1.2rem; /* Yazı boyutu */
+  padding: 10px;
+ 
+  
+  color:rgb(171, 55, 5); /* Daha koyu metin rengi */
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.btn-home {
+  display: block;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 20px auto 0; /* Üste ve alta boşluk ekledim */
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  width: 100%; /* Butonu tam genişlet */
+  max-width: 200px; /* Ancak makul genişlikte sınırla */
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-home:hover {
+  background-color: #0056b3; /* Daha koyu mavi */
+  transform: scale(1.05); /* Hover efekti */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
+}
+header {
+  position: absolute;
+  top: 20px;
+  left: 70px;
+  z-index: 1000; /* Üstte görünmesi için */
+}
+
+.btn-back-home {
+  font-size: 1.8rem; /* Simgenin boyutu */
+  color: #fff; /* Beyaz renk */
+  text-decoration: none; /* Alt çizgiyi kaldır */
+  background: none; /* Arka plan yok */
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease; /* Geçiş efektleri */
+}
+
+.btn-back-home:hover {
+  color: #ff7e5f; /* Hover sırasında renk değişikliği */
+  transform: translateX(-5px); /* Hover'da sola hareket */
+}
+
+
+  </style>
+</head>
+<header>
+  <a href="/" class="btn-back-home" aria-label="Ana Sayfa">
+    ←
+  </a>
+</header>
+
+<body>
+  <div class="scan-container">
+    <h1>Görsel Tarama</h1>
+    <p>Görsellerinizi taratarak sonuçlarınızı alabilirsiniz.</p>
+    
+    {% if logged_in %}
+    <!-- Giriş yapmış kullanıcılar için direkt tarama formu -->
+    <div id="scan-form-container">
+      <p class="mt-4">Lütfen taranacak görüntüyü yükleyin ve sonucu almak için "Tara" butonuna tıklayın.</p>
+      <form id="scan-form" action="/upload" method="POST" enctype="multipart/form-data" onsubmit="return handleFormSubmission(event)">
+        <input type="file" name="images" class="form-control" accept="image/*" multiple required />
+        <button type="submit" class="btn-primary">Tara</button>
+      </form>
+    </div>
+    {% else %}
+    <!-- Misafir kullanıcılar için seçim ekranı -->
+    <div class="user-options" id="user-options">
+      <p>Analizlerinizi kaydedebilmek için giriş yapmalısınız ya da misafir olarak devam edebilirsiniz.</p>
+      <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Giriş Yap</button>
+      <button type="button" class="btn btn-secondary" onclick="continueAsGuest()">Misafir Olarak Devam Et</button>
+    </div>
+
+    <!-- Misafirler için uyarı mesajı ve tarama formu -->
+    <div id="guest-warning" style="display: none; margin-top: 20px; font-size: 1.1rem; color: #dc3545; text-align: center;">
+      Misafir olarak devam ediyorsunuz. Analizleriniz kaydedilmeyecek ve daha sonra görüntülenemeyecek.
+    </div>
+
+    <div id="scan-form-container" style="display: none;">
+      <p class="mt-4">Lütfen taranacak görüntüyü yükleyin ve sonucu almak için "Tara" butonuna tıklayın.</p>
+      <form id="scan-form" action="/upload" method="POST" enctype="multipart/form-data" onsubmit="return handleFormSubmission(event)">
+        <input type="file" name="images" class="form-control" accept="image/*" multiple required />
+        <button type="submit" class="btn-primary">Tara</button>
+      </form>
+    </div>
+    {% endif %}
+
+
+    <div id="loader" style="display: none;"></div>
+
+      
+      <!-- Tahmin Sonucu -->
+      <div id="scan-result">
+        {% if results %}
+          <h3>Sonuçlar:</h3>
+          <ul>
+            {% for result in results %}
+              <li>{{ result.image }}: {{ result.prediction }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      
+    </div>
+  
+
+<script>
+  function redirectToLogin() {
+    window.location.href = "/login"; // Kullanıcı giriş sayfasına yönlendirilir
+  }
+  
+  function continueAsGuest() {
+    // Kullanıcı seçim butonlarını gizle
+    const userOptions = document.getElementById('user-options');
+    userOptions.style.display = 'none';
+  
+    // Uyarı mesajını ve formu göster
+    const guestWarning = document.getElementById('guest-warning');
+    const scanFormContainer = document.getElementById('scan-form-container');
+    guestWarning.style.display = 'block';
+    scanFormContainer.style.display = 'block';
+  }
+  
+
+  function handleFormSubmission(event) {
+    event.preventDefault(); // Sayfanın yeniden yüklenmesini engelle
+    const form = document.getElementById('scan-form');
+    const formData = new FormData(form);
+  
+    // Yükleme animasyonunu göster
+    const loader = document.getElementById('loader');
+    if (!loader) {
+      console.error("Hata: `loader` öğesi bulunamadı."); // Konsola hata mesajı gönder
+      return; // Eğer `loader` öğesi yoksa işlemi durdur
+    }
+    loader.style.display = 'block'; // Yükleme animasyonunu göster
+    
+
+    // Form gönderim işlemi
+    fetch(form.action, {
+      method: form.method,
+      body: formData
+    })
+      .then(response => {
+        console.log("Backend Yanıtı (Raw):", response); // Yanıtın durumunu kontrol et
+        if (!response.ok) {
+          throw new Error(`Sunucu Hatası: ${response.statusText}`);
+        }
+        return response.json(); // JSON formatına dönüştür
+      })
+      .then(data => {
+        console.log("Backend JSON Yanıtı:", data); // JSON yanıtını kontrol et
+  
+        // Yükleme animasyonunu gizle
+        loader.style.display = 'none';
+  
+        // Tarama sonuçlarını göster
+        const scanResult = document.getElementById('scan-result');
+        scanResult.style.display = 'block';
+        scanResult.innerHTML = `
+          <h3>Sonuçlar:</h3>
+          <ul>
+            ${data.results.map(result => `<li>${result.image}: ${result.prediction}</li>`).join('')}
+          </ul>
+        `;
+  
+        // Formu sıfırla
+        form.reset();
+      })
+      .catch(error => {
+        console.error("Hata:", error); // Hata detaylarını konsola yaz
+        loader.style.display = 'none'; // Yükleme animasyonunu gizle
+        alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+      });
+  }
+  
+  
+  
+    </script>
+  </body>
+  
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Yap - Mamografi Projesi</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+  <style>
+
+.main-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sol Taraf: Görsel */ .image-section { flex: 1; background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/slider.png') no-repeat center center; background-size: cover; }
+
+/* Sağ Taraf: Login Formu */
+.form-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7); /* Hafif koyuluk */
+}
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  height: 100vh;
+  background: linear-gradient(135deg, #1f1f1f, #007bff, #28a745); /* Hareketli gradyan */
+  background-size: 400% 400%;
+  animation: gradient-animation 10s ease infinite; /* Gradyan animasyonu */
+  display: flex; /* Esnek düzen */
+  justify-content: center; /* Yatay ortalama */
+  align-items: center; /* Dikey ortalama */
+}
+
+@keyframes gradient-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.login-container {
+  background: rgba(224, 224, 224, 0.1); /* Şeffaf form arka plan */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Hafif gölge */
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  z-index: 1; /* Üstte kalır */
+}
+
+
+    .login-container i {
+      font-size: 4rem;
+      color: #5dcc85; /* İkon rengi */
+      margin-bottom: 20px;
+    }
+
+    .login-container h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3); /* #28a745'in RGB değerine göre */
+
+      border: 1px solid #5dcc85;
+    }
+
+    .btn-primary {
+      background-color: #5dcc85;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      width: 100%;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color:rgb(66, 145, 95);
+    }
+
+    .form-check-label {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    .form-check-input:checked + .form-check-label {
+        color: #5dcc85; /* Tıklandığında renk değişir */
+     }
+     .form-check-input {
+        appearance: none; /* Varsayılan tarayıcı stilini kaldırır */
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background-color: #1f1f1f; /* Varsayılan arka plan rengi */
+        border: 2px solid #ccc; /* Kenarlık rengi */
+        border-radius: 4px; /* Hafif köşeli */
+        cursor: pointer;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+      
+      .form-check-input:checked {
+        background-color: #5dcc85; /* Seçildiğinde arka plan rengi */
+        border-color: #5dcc85; /* Seçildiğinde kenarlık rengi */
+      }
+      
+      .form-check-input:focus {
+        outline: none; /* Tarayıcı focus halkasını kaldırır */
+        box-shadow: 0 0 5px #5dcc85; /* Odakta gölge */
+      }
+      
+   
+
+    .register-link {
+      margin-top: 20px;
+      display: block;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .register-link a {
+      color: #5dcc85;
+      text-decoration: none;
+    }
+
+    .register-link a:hover {
+      color: #5dcc85;
+    }
+    header {
+      position: absolute;
+      top: 20px;
+      left: 70px;
+      z-index: 1000; /* Üstte görünmesi için */
+    }
+    
+    .btn-back-home {
+      font-size: 1.8rem; /* Simgenin boyutu */
+      color: #fff; /* Beyaz renk */
+      text-decoration: none; /* Alt çizgiyi kaldır */
+      background: none; /* Arka plan yok */
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease; /* Geçiş efektleri */
+    }
+    
+    .btn-back-home:hover {
+      color: #ff7e5f; /* Hover sırasında renk değişikliği */
+      transform: translateX(-5px); /* Hover'da sola hareket */
+    }
+
+    .forgot-password {
+      text-decoration: none;
+      color: #5dcc85;
+      font-size: 0.9rem;
+    }
+    .forgot-password:hover {
+      color: #5dcc85;
+    }
+    #forgotForm {
+      background: rgba(255, 255, 255, 0.1); /* Şeffaf arka plan */
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Hafif gölge */
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      position: absolute; /* Giriş yap formunun pozisyonunda sabit */
+      top: 50%; /* Formu dikey olarak merkezler */
+      left: 50%; /* Formu yatay olarak merkezler */
+      transform: translate(-50%, -50%); /* Merkezleme tamamlanır */
+      display: none; /* Başlangıçta gizli */
+      z-index: 100; /* Üstte görünmesini sağlar */
+    }
+    /* Gönder Butonu */
+#forgotForm .btn-primary {
+  background-color: #5dcc85;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+#forgotForm .btn-primary:hover {
+  background-color:rgb(66, 145, 95);
+}
+
+/* Kapat Butonu */
+#forgotForm .btn-secondary {
+  background: none; /* Arka planı kaldır */
+  border: none; /* Kenarlığı kaldır */
+  color: #5dcc85;/* Gri ton */
+  text-decoration: underline; /* Alt çizgi ekle */
+  font-size: 1rem; /* Yazı boyutu */
+  font-weight: bold; /* Kalın metin */
+  cursor: pointer; /* İşaretçi stili */
+  padding: 0; /* Fazla boşluğu kaldır */
+  transition: color 0.3s ease; /* Geçiş efekti */
+}
+
+#forgotForm .btn-secondary:hover {
+  color: rgb(66, 145, 95); /* Hover sırasında renk değiştir (mavi ton) */
+  text-decoration: none; /* Alt çizgiyi kaldır */
+}
+
+  </style>
+</head>
+<header>
+  <a href="/" class="btn-back-home" aria-label="Ana Sayfa">
+    ←
+  </a>
+</header>
+<body>
+  <div class="login-container">
+    <i class="bi bi-person-circle"></i>
+    <h1>Giriş Yap</h1>
+    <form method="POST" action="/login">
+      <input type="text" id="identifier" name="identifier" class="form-control" placeholder="E-posta veya Kullanıcı Adı" required />
+      <div style="position: relative;">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Şifre" required />
+        <i class="bi bi-eye" id="togglePassword" style="position: absolute; font-size: 1rem; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer; color: #5dcc85;"></i>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe" />
+          <label class="form-check-label" for="rememberMe">Beni Hatırla</label>
+        </div>
+        <a href="javascript:void(0)" id="forgotPasswordButton" class="forgot-password">Şifremi Unuttum?</a>
+      </div>
+      <button type="submit" class="btn btn-primary">Giriş Yap</button>
+    </form>
+    <p class="register-link">
+      Hesabınız yok mu? <a href="/register">Kayıt Olun</a>
+    </p>
+  </div>
+  <div class="login-container" id="forgotForm" style="display: none;">
+    <h3>Şifre Sıfırla</h3>
+    <form method="POST" action="/forgot-password">
+      <input type="email" name="email" class="form-control mb-3" placeholder="E-posta Adresiniz" required />
+      <button type="submit" class="btn btn-primary mb-2">Gönder</button>
+      <button type="button" id="closeForgotForm" class="btn btn-secondary">Kapat</button>
+    </form>
+  </div>
+  
+</body>
+
+</html>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.querySelector('.login-container'); // Giriş yap kutusu
+    const forgotForm = document.getElementById('forgotForm'); // Şifre sıfırlama kutusu
+    const forgotPasswordButton = document.getElementById('forgotPasswordButton'); // Şifremi Unuttum butonu
+    const closeForgotForm = document.getElementById('closeForgotForm'); // Kapat butonu
+
+    // Şifre sıfırlama formunu aç
+    if (forgotPasswordButton) {
+      forgotPasswordButton.addEventListener('click', () => {
+        forgotForm.style.display = 'block'; // Şifre sıfırlama formunu göster
+        loginForm.style.display = 'none'; // Giriş yap formunu gizle
+      });
+    }
+
+    // Şifre sıfırlama formunu kapat
+    if (closeForgotForm) {
+      closeForgotForm.addEventListener('click', () => {
+        forgotForm.style.display = 'none'; // Şifre sıfırlama formunu gizle
+        loginForm.style.display = 'block'; // Giriş yap formunu tekrar göster
+      });
+    }
+  });
+
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordField = document.getElementById('password');
+
+  togglePassword.addEventListener('click', function () {
+    const type = passwordField.type === 'password' ? 'text' : 'password';
+    passwordField.type = type;
+
+    // İkonu değiştir (göz/göz kapalı)
+    this.classList.toggle('bi-eye');
+    this.classList.toggle('bi-eye-slash');
+  });
+</script>

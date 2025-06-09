@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muayene Takvimi</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <style>
+ 
+    /* Genel Stil */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1f1f1f, #007bff, #28a745); /* Hareketli gradyan */
+      background-size: 400% 400%;
+      animation: gradient-animation 10s ease infinite; /* Gradyan animasyonu */
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes gradient-animation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  
+  
+    
+    /* Header */
+    .header {
+      background: #007bff;
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .header p {
+      font-size: 1.2rem;
+      margin-bottom: 0;
+    }
+
+    /* Takvim Sekmesi */
+    .timeline {
+      margin: 3rem auto;
+      max-width: 800px;
+      text-align: left;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .timeline-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      color: #007bff;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-item p {
+      font-size: 1rem;
+      color: #666;
+    }
+    .timeline-icon {
+      margin-right: 1rem;
+      font-size: 2rem;
+      color: #28a745;
+    }
+
+    /* Call-to-Action Bölümü */
+    .cta {
+      background: linear-gradient(90deg, #007bff, #28a745);
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+      margin: 3rem auto;
+      max-width: 800px;
+      border-radius: 8px;
+    }
+    .cta h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+    }
+    .cta button {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 50px;
+      background: #fff;
+      color: #007bff;
+      transition: background 0.3s, color 0.3s;
+    }
+    .cta button:hover {
+      background: #007bff;
+      color: #fff;
+    }
+    header {
+      position: absolute;
+      top: 20px;
+      left: 70px;
+      z-index: 1000; /* Üstte görünmesi için */
+    }
+    
+    .btn-back-home {
+      font-size: 1.8rem; /* Simgenin boyutu */
+      color: #fff; /* Beyaz renk */
+      text-decoration: none; /* Alt çizgiyi kaldır */
+      background: none; /* Arka plan yok */
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease; /* Geçiş efektleri */
+    }
+    
+    .btn-back-home:hover {
+      color: #ff7e5f; /* Hover sırasında renk değişikliği */
+      transform: translateX(-5px); /* Hover'da sola hareket */
+    }
+  </style>
+</head>
+<header>
+  <a href="/" class="btn-back-home" aria-label="Ana Sayfa">
+    ←
+  </a>
+</header>
+<body>
+
+
+  <!-- Muayene Takvimi -->
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="timeline-icon">&#128154;</span>
+      <div>
+        <h3>20'li Yaşlar</h3>
+        <p>Her ay kendi kendine meme kontrolü yapmanız önerilir. Profesyonel muayene yalnızca risk grubu varsa düşünülmelidir.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-icon">&#128154;</span>
+      <div>
+        <h3>30'lu Yaşlar</h3>
+        <p>Her yıl düzenli doktor kontrolü yaptırmanız önerilir. Risk durumunda mamografi düşünülebilir.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-icon">&#128154;</span>
+      <div>
+        <h3>40 Yaş ve Üzeri</h3>
+        <p>Yılda bir kez mamografi çektirmeniz ve düzenli doktor muayenesi yaptırmanız önemlidir.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-icon">&#128154;</span>
+      <div>
+        <h3>Özel Risk Grubu</h3>
+        <p>Ailede meme kanseri öyküsü olanlar veya genetik risk taşıyanlar için doktora danışarak özel bir kontrol planı oluşturulmalıdır.</p>
+      </div>
+    </div>
+  </div>
+
+ 
+
+</body>
+</html>
